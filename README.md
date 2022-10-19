@@ -9,3 +9,4 @@
 - [ ] Membuat halaman categories
 - [ ] Membuat halaman profile
 - [ ] Consume API
+- [ ] sedang dalam proses
