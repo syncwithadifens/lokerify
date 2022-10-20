@@ -7,7 +7,7 @@
 - [x] Membuat halaman splash screen
 - [x] Membuat halaman home
 - [ ] Membuat halaman categories
-- [ ] Membuat halaman profile
+- [x] Membuat halaman profile
 - [x] Menambahkan navigation bar
 - [x] Membuat model
 - [ ] Consume API

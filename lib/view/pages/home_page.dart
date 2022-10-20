@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/widgets/avatar.dart';
 import 'package:lokerify/view/widgets/job_card.dart';
+import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -9,13 +11,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-      ),
+      bottomNavigationBar: const CustomNavigationBar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
         child: Column(
@@ -37,24 +33,9 @@ class HomePage extends StatelessWidget {
                         style: subtitleStyle),
                   ],
                 ),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: whiteColor,
-                          border: Border.all(color: blackColor)),
-                    ),
-                    Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: whiteColor),
-                    )
-                  ],
+                const Avatar(
+                  h: 50,
+                  w: 50,
                 )
               ],
             ),

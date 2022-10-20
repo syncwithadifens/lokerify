@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/widgets/avatar.dart';
 
 class JobCard extends StatelessWidget {
   const JobCard({
@@ -55,24 +56,9 @@ class JobCard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: whiteColor,
-                            border: Border.all(color: blackColor)),
-                      ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: whiteColor),
-                      )
-                    ],
+                  const Avatar(
+                    h: 50,
+                    w: 50,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
