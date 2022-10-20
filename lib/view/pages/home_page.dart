@@ -33,10 +33,7 @@ class HomePage extends StatelessWidget {
                         style: subtitleStyle),
                   ],
                 ),
-                const Avatar(
-                  h: 50,
-                  w: 50,
-                )
+                const Avatar()
               ],
             ),
             Padding(

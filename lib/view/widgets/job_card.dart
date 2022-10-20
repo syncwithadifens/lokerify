@@ -56,10 +56,7 @@ class JobCard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
-                  const Avatar(
-                    h: 50,
-                    w: 50,
-                  ),
+                  const Avatar(),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Column(

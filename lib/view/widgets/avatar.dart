@@ -6,8 +6,8 @@ class Avatar extends StatelessWidget {
   final double h;
   const Avatar({
     Key? key,
-    required this.h,
-    required this.w,
+    this.h = 50,
+    this.w = 50,
   }) : super(key: key);
 
   @override

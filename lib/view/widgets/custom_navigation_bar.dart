@@ -10,7 +10,9 @@ class CustomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int currentIndex = 0;
     void navbarLogic(int index) {
+      currentIndex = index;
       if (index == 0) {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -34,6 +36,7 @@ class CustomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       elevation: 0,
       selectedItemColor: primaryColor,
+      currentIndex: currentIndex,
       onTap: (value) => navbarLogic(value),
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
