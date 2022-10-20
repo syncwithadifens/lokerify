@@ -16,7 +16,9 @@ class SplashPage extends StatelessWidget {
       ),
     );
     return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+      value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark),
       child: Scaffold(
         backgroundColor: primaryColor,
         body: Center(
