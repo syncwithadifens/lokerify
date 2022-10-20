@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1047702083314',
     projectId: 'lokerify-1513a',
     storageBucket: 'lokerify-1513a.appspot.com',
-    iosClientId: '1047702083314-3ekg6l23fnhrk75u378d6vf8etavusvu.apps.googleusercontent.com',
+    iosClientId:
+        '1047702083314-3ekg6l23fnhrk75u378d6vf8etavusvu.apps.googleusercontent.com',
     iosBundleId: 'com.example.lokerify',
   );
 }
