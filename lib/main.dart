@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lokerify/view/pages/splash_page.dart';
+import 'package:lokerify/view_model/category_provider.dart';
 import 'package:lokerify/view_model/job_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => JobProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CategoryProvider(),
         )
       ],
       child: const MaterialApp(

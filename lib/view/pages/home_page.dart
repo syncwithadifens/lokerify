@@ -16,7 +16,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<JobProvider>(context, listen: false).getjobs();
   }
@@ -59,18 +58,22 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 10),
-                itemCount: jobProvider.result.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: JobCard(
-                      jobData: jobProvider.result[index],
+              child: jobProvider.isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(top: 10),
+                      itemCount: jobProvider.result.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: JobCard(
+                            jobData: jobProvider.result[index],
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
             )
           ],
         ),

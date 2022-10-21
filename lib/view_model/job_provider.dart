@@ -6,10 +6,21 @@ class JobProvider extends ChangeNotifier {
   final apiRepository = ApiRepository();
   List<JobModel> _result = [];
   List<JobModel> get result => _result;
+  bool isLoading = false;
+  bool isApplied = false;
+  String message = 'Apply';
 
   Future<void> getjobs() async {
+    isLoading = true;
     final response = await apiRepository.getAllJob();
     _result = response;
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void appliedJob() {
+    isApplied = !isApplied;
+    isApplied ? message = 'Job already applied' : message = 'Apply';
     notifyListeners();
   }
 }

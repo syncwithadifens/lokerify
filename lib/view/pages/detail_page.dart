@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lokerify/model/job_model/job_model.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/widgets/avatar.dart';
+import 'package:lokerify/view_model/job_provider.dart';
+import 'package:provider/provider.dart';
 
 class DetailPage extends StatelessWidget {
   final JobModel id;
@@ -9,17 +12,19 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final jobProvider = Provider.of<JobProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back)),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
-        elevation: 0,
-      ),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_back)),
+          backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark)),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
@@ -71,8 +76,8 @@ class DetailPage extends StatelessWidget {
                 style: titleStyle.copyWith(fontSize: 14),
               ),
             ),
-            SizedBox(
-              height: 50,
+            Expanded(
+              flex: 1,
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
@@ -101,6 +106,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 2,
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
@@ -133,6 +139,7 @@ class DetailPage extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 2,
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.zero,
@@ -157,17 +164,22 @@ class DetailPage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Center(
-                  child: Text(
-                    'Apply',
-                    style: subtitleStyle.copyWith(color: whiteColor),
+              child: GestureDetector(
+                onTap: () => jobProvider.appliedJob(),
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: jobProvider.isApplied
+                        ? const Color.fromARGB(255, 136, 24, 16)
+                        : primaryColor,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Center(
+                    child: Text(
+                      jobProvider.message,
+                      style: subtitleStyle.copyWith(color: whiteColor),
+                    ),
                   ),
                 ),
               ),

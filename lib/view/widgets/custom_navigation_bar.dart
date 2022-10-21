@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/pages/category_page.dart';
 import 'package:lokerify/view/pages/home_page.dart';
 import 'package:lokerify/view/pages/profile_page.dart';
 
@@ -20,6 +21,11 @@ class CustomNavigationBar extends StatelessWidget {
           ),
         );
       } else if (index == 1) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const CategoryPage(),
+          ),
+        );
       } else {
         Navigator.of(context).push(
           MaterialPageRoute(
