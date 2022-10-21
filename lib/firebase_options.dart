@@ -17,16 +17,16 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -49,22 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDfVeXY_WNcixicavjkd7hq2Tf-3TCFhdg',
+    appId: '1:1047702083314:web:9a3a591abaeba956a8a26b',
+    messagingSenderId: '1047702083314',
+    projectId: 'lokerify-1513a',
+    authDomain: 'lokerify-1513a.firebaseapp.com',
+    storageBucket: 'lokerify-1513a.appspot.com',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDdVTmiP2cQ01FvrDnn6oXsijgBwLEdbHY',
     appId: '1:1047702083314:android:9f4637dace55f4a3a8a26b',
     messagingSenderId: '1047702083314',
     projectId: 'lokerify-1513a',
     storageBucket: 'lokerify-1513a.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD8dSVyAvqJLx6wua1gHnpl_Xpjfc0KxC4',
-    appId: '1:1047702083314:ios:eed06142f5a3b73ca8a26b',
-    messagingSenderId: '1047702083314',
-    projectId: 'lokerify-1513a',
-    storageBucket: 'lokerify-1513a.appspot.com',
-    iosClientId:
-        '1047702083314-3ekg6l23fnhrk75u378d6vf8etavusvu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.lokerify',
   );
 }

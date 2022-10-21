@@ -32,7 +32,7 @@ class ProfilePage extends StatelessWidget {
                 style: subtitleStyle,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 60),
+                padding: const EdgeInsets.only(top: 20),
                 child: Container(
                   width: 120,
                   height: 50,
