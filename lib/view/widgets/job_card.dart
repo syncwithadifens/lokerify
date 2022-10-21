@@ -3,9 +3,15 @@ import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/widgets/avatar.dart';
 
 class JobCard extends StatelessWidget {
-  const JobCard({
-    Key? key,
-  }) : super(key: key);
+  final String companyLogo;
+  final String name;
+  final String companyName;
+  const JobCard(
+      {Key? key,
+      required this.name,
+      required this.companyName,
+      required this.companyLogo})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,21 +62,23 @@ class JobCard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
-                  const Avatar(),
+                  Avatar(
+                    img: companyLogo,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Web Developer',
+                          name,
                           style: titleStyle.copyWith(
                             fontSize: 14,
                             color: whiteColor,
                           ),
                         ),
                         Text(
-                          'PT Blitaris Tekno',
+                          companyName,
                           style: subtitleStyle.copyWith(
                             fontSize: 12,
                             color: whiteColor,

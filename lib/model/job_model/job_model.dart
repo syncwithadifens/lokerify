@@ -1,42 +1,42 @@
 class JobModel {
-  String? id;
-  String? name;
-  String? category;
-  String? companyName;
-  String? companyLogo;
-  String? location;
-  List<String>? about;
-  List<String>? qualifications;
-  List<String>? responsibilities;
-  int? createdAt;
-  int? updatedAt;
+  String id;
+  String name;
+  String category;
+  String companyName;
+  String companyLogo;
+  String location;
+  List about;
+  List qualifications;
+  List responsibilities;
+  int createdAt;
+  int updatedAt;
 
   JobModel({
-    this.id,
-    this.name,
-    this.category,
-    this.companyName,
-    this.companyLogo,
-    this.location,
-    this.about,
-    this.qualifications,
-    this.responsibilities,
-    this.createdAt,
-    this.updatedAt,
+    required this.id,
+    required this.name,
+    required this.category,
+    required this.companyName,
+    required this.companyLogo,
+    required this.location,
+    required this.about,
+    required this.qualifications,
+    required this.responsibilities,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory JobModel.fromJson(Map<String, dynamic> json) => JobModel(
-        id: json['id'] as String?,
-        name: json['name'] as String?,
-        category: json['category'] as String?,
-        companyName: json['companyName'] as String?,
-        companyLogo: json['companyLogo'] as String?,
-        location: json['location'] as String?,
-        about: json['about'] as List<String>?,
-        qualifications: json['qualifications'] as List<String>?,
-        responsibilities: json['responsibilities'] as List<String>?,
-        createdAt: json['createdAt'] as int?,
-        updatedAt: json['updatedAt'] as int?,
+        id: json['id'],
+        name: json['name'],
+        category: json['category'],
+        companyName: json['companyName'],
+        companyLogo: json['companyLogo'],
+        location: json['location'],
+        about: json['about'],
+        qualifications: json['qualifications'],
+        responsibilities: json['responsibilities'],
+        createdAt: json['createdAt'],
+        updatedAt: json['updatedAt'],
       );
 
   Map<String, dynamic> toJson() => {
