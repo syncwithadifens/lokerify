@@ -38,10 +38,25 @@ class CustomNavigationBar extends StatelessWidget {
       selectedItemColor: primaryColor,
       currentIndex: currentIndex,
       onTap: (value) => navbarLogic(value),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.category), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+      items: [
+        BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/office.png',
+              height: 30,
+            ),
+            label: ''),
+        BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/category.png',
+              height: 30,
+            ),
+            label: ''),
+        BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/profile.png',
+              height: 30,
+            ),
+            label: ''),
       ],
     );
   }

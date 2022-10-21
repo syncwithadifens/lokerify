@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:lokerify/model/job_model/job_model.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/pages/detail_page.dart';
 import 'package:lokerify/view/widgets/avatar.dart';
 
 class JobCard extends StatelessWidget {
-  final String companyLogo;
-  final String name;
-  final String companyName;
-  const JobCard(
-      {Key? key,
-      required this.name,
-      required this.companyName,
-      required this.companyLogo})
-      : super(key: key);
+  final JobModel jobData;
+  const JobCard({
+    Key? key,
+    required this.jobData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,43 +25,39 @@ class JobCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Row(
-              children: [
-                Container(
-                  height: 20,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    height: 20,
-                    width: 50,
+            SizedBox(
+              height: 25,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                itemCount: jobData.about.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: const EdgeInsets.only(right: 10),
                     decoration: BoxDecoration(
                       color: whiteColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                  ),
-                ),
-                Container(
-                  height: 20,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Center(
+                        child: Text(
+                          jobData.about[index],
+                          style: subtitleStyle.copyWith(fontSize: 10),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 20),
               child: Row(
                 children: [
                   Avatar(
-                    img: companyLogo,
+                    img: jobData.companyLogo,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
@@ -71,14 +65,14 @@ class JobCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          name,
+                          jobData.name,
                           style: titleStyle.copyWith(
                             fontSize: 14,
                             color: whiteColor,
                           ),
                         ),
                         Text(
-                          companyName,
+                          jobData.companyName,
                           style: subtitleStyle.copyWith(
                             fontSize: 12,
                             color: whiteColor,
@@ -91,15 +85,22 @@ class JobCard extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Container(
-              alignment: Alignment.bottomRight,
-              width: 50,
-              height: 20,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: whiteColor,
+            GestureDetector(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => DetailPage(
+                  id: jobData,
+                ),
+              )),
+              child: Container(
+                alignment: Alignment.bottomRight,
+                width: 50,
+                height: 20,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: whiteColor,
+                ),
+                child: const Center(child: Text('Detail')),
               ),
-              child: const Center(child: Text('Detail')),
             )
           ],
         ),

@@ -6,13 +6,24 @@ import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 import 'package:lokerify/view_model/job_provider.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<JobProvider>(context, listen: false).getjobs();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final jobProvider = Provider.of<JobProvider>(context, listen: false);
-    jobProvider.getjobs();
+    final jobProvider = Provider.of<JobProvider>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       bottomNavigationBar: const CustomNavigationBar(),
@@ -43,8 +54,8 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                'Loker terbaru',
-                style: titleStyle,
+                'Semua loker tersedia',
+                style: titleStyle.copyWith(fontSize: 18),
               ),
             ),
             Expanded(
@@ -55,9 +66,7 @@ class HomePage extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: JobCard(
-                      companyLogo: jobProvider.result[index].companyLogo,
-                      name: jobProvider.result[index].name,
-                      companyName: jobProvider.result[index].companyName,
+                      jobData: jobProvider.result[index],
                     ),
                   );
                 },
