@@ -13,6 +13,5 @@
 - [x] Membuat model
 - [x] Consume API
 - [x] Refactoring dengan state management provider
-- [ ] Sedang dalam proses...
-- [ ] Membuat halaman login
-- [ ] Membuat halaman register
+- [x] Membuat halaman login
+- [x] Membuat halaman register
