@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:lokerify/view/pages/splash_page.dart';
+import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:lokerify/view_model/category_provider.dart';
 import 'package:lokerify/view_model/job_provider.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => CategoryProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
         )
       ],
       child: const MaterialApp(

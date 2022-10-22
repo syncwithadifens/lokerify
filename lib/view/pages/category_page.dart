@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 import 'package:lokerify/view_model/category_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ class CategoryPage extends StatelessWidget {
     final categoryProvider = Provider.of<CategoryProvider>(context);
     categoryProvider.getCategories();
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
@@ -26,6 +28,7 @@ class CategoryPage extends StatelessWidget {
         systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark),
       ),
+      bottomNavigationBar: const CustomNavigationBar(),
       body: Padding(
         padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
         child: GridView.builder(

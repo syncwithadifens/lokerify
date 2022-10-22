@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lokerify/theme/styles.dart';
-import 'package:lokerify/view/pages/home_page.dart';
+import 'package:lokerify/view/pages/login_page.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -11,7 +11,7 @@ class SplashPage extends StatelessWidget {
       const Duration(seconds: 3),
       () => Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => LoginPage(),
         ),
       ),
     );

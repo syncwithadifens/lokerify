@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/pages/login_page.dart';
 import 'package:lokerify/view/widgets/avatar.dart';
 import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
+import 'package:lokerify/view_model/auth_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: whiteColor,
       bottomNavigationBar: const CustomNavigationBar(),
@@ -33,14 +37,24 @@ class ProfilePage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  width: 120,
-                  height: 50,
-                  color: primaryColor,
-                  child: Center(
-                    child: Text(
-                      'Keluar',
-                      style: subtitleStyle.copyWith(color: whiteColor),
+                child: GestureDetector(
+                  onTap: () => authProvider.logout().whenComplete(
+                        () => Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginPage(),
+                            ),
+                            (route) => false),
+                      ),
+                  child: Container(
+                    width: 120,
+                    height: 50,
+                    color: primaryColor,
+                    child: Center(
+                      child: Text(
+                        'Keluar',
+                        style: subtitleStyle.copyWith(color: whiteColor),
+                      ),
                     ),
                   ),
                 ),
