@@ -17,7 +17,8 @@ jobs:
       #- run: flutter test
       - run: flutter build apk
       - name: Push APK to Releases
-        uses: ncipollo/release-action@v1
+        uses: Shopify/upload-to-release@v1
         with:
-          artifacts: "build/app/outputs/apk/debug/*.apk"
-          token: ${{ secrets.GH_TOKEN }}
+          name: Demo App Release
+          path: build/app/outputs/apk/debug/*.apk
+          repo-token: ${{ secrets.GH_TOKEN }}
