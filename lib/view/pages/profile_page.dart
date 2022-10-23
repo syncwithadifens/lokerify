@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/pages/login_page.dart';
@@ -6,8 +8,33 @@ import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  String name = '';
+  String email = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  void getUser() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+    setState(() {
+      name = (snapshot.data() as Map<String, dynamic>)['name'];
+      email = (snapshot.data() as Map<String, dynamic>)['email'];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,25 +54,25 @@ class ProfilePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
-                  'Afiv Dicky Efendy',
+                  name,
                   style: titleStyle,
                 ),
               ),
               Text(
-                'adifens@gmail.com',
+                email,
                 style: subtitleStyle,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: GestureDetector(
-                  onTap: () => authProvider.logout().whenComplete(
-                        () => Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
-                            ),
-                            (route) => false),
-                      ),
+                  onTap: () => authProvider
+                      .logout()
+                      .whenComplete(() => Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LoginPage(),
+                          ),
+                          (route) => false)),
                   child: Container(
                     width: 120,
                     height: 50,

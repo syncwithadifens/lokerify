@@ -91,7 +91,8 @@ class RegisterPage extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   authProvider
-                      .register(emailCtrl.text, passwordCtrl.text)
+                      .register(
+                          emailCtrl.text, passwordCtrl.text, nameCtrl.text)
                       .whenComplete(
                           () => Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomePage(),

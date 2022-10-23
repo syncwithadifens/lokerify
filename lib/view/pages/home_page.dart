@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/widgets/avatar.dart';
@@ -14,10 +16,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String name = '';
+
   @override
   void initState() {
     super.initState();
     Provider.of<JobProvider>(context, listen: false).getjobs();
+    getUser();
+  }
+
+  void getUser() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+    setState(() {
+      name = (snapshot.data() as Map<String, dynamic>)['name'];
+    });
   }
 
   @override
@@ -39,7 +54,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hi, Afiv',
+                      'Hi, $name',
                       style: titleStyle.copyWith(
                           fontSize: 20, fontWeight: FontWeight.w400),
                     ),
