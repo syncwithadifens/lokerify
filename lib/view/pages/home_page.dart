@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Text(
                 'Semua loker tersedia',
                 style: titleStyle.copyWith(fontSize: 18),

@@ -3,7 +3,10 @@ import 'package:lokerify/model/job_model/job_model.dart';
 import 'package:lokerify/service/api_repository.dart';
 
 class JobProvider extends ChangeNotifier {
-  final apiRepository = ApiRepository();
+  final ApiRepository apiRepository;
+  JobProvider({required this.apiRepository}) {
+    getjobs();
+  }
   List<JobModel> _result = [];
   List<JobModel> get result => _result;
   bool isLoading = false;

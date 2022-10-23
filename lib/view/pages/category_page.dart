@@ -29,45 +29,51 @@ class CategoryPage extends StatelessWidget {
             statusBarIconBrightness: Brightness.dark),
       ),
       bottomNavigationBar: const CustomNavigationBar(),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-        child: GridView.builder(
-          itemCount: categoryProvider.result.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-          ),
-          itemBuilder: (context, index) {
-            return Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: primaryColor),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
+      body: categoryProvider.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Padding(
+              padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+              child: GridView.builder(
+                itemCount: categoryProvider.result.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              categoryProvider.result[index].imageUrl),
-                          fit: BoxFit.cover,
+                        color: primaryColor),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    categoryProvider.result[index].imageUrl),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        Text(
+                          categoryProvider.result[index].name,
+                          style: titleStyle.copyWith(
+                              fontSize: 16, color: whiteColor),
+                        )
+                      ],
                     ),
-                  ),
-                  Text(
-                    categoryProvider.result[index].name,
-                    style: titleStyle.copyWith(fontSize: 16, color: whiteColor),
-                  )
-                ],
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
+            ),
     );
   }
 }

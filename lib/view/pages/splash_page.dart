@@ -15,27 +15,29 @@ class SplashPage extends StatelessWidget {
         ),
       ),
     );
-    return AnnotatedRegion(
-      value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark),
-      child: Scaffold(
-        backgroundColor: primaryColor,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/logo.png'),
-              Text(
-                'Lokerify',
-                style: titleStyle,
-              ),
-              Text(
-                'Cari pekerjaanmu secepatnya',
-                style: subtitleStyle,
-              )
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark),
+      ),
+      backgroundColor: primaryColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/logo.png'),
+            Text(
+              'Lokerify',
+              style: titleStyle,
+            ),
+            Text(
+              'Cari pekerjaanmu secepatnya',
+              style: subtitleStyle,
+            )
+          ],
         ),
       ),
     );
