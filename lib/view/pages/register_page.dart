@@ -4,15 +4,35 @@ import 'package:lokerify/view/pages/home_page.dart';
 import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:provider/provider.dart';
 
-class RegisterPage extends StatelessWidget {
-  RegisterPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   final nameCtrl = TextEditingController();
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    void showError(String message) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        backgroundColor: Colors.red,
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+        ),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8), topRight: Radius.circular(8))),
+      ));
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -89,19 +109,39 @@ class RegisterPage extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20), color: primaryColor),
               child: TextButton(
-                onPressed: () {
-                  authProvider
+                onPressed: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  await authProvider
                       .register(
                           emailCtrl.text, passwordCtrl.text, nameCtrl.text)
-                      .whenComplete(
-                          () => Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const HomePage(),
-                              )));
+                      .then((result) {
+                    if (result.isNotEmpty) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ));
+                    } else {
+                      showError(authProvider.message);
+                    }
+                  });
+                  Future.delayed(
+                    const Duration(seconds: 4),
+                    () {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    },
+                  );
                 },
-                child: const Text(
-                  'Daftar',
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : const Text(
+                        'Daftar',
+                        style: TextStyle(color: Colors.white),
+                      ),
               ),
             ),
             Padding(

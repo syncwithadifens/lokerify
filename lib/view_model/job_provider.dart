@@ -12,13 +12,20 @@ class JobProvider extends ChangeNotifier {
   bool isLoading = false;
   bool isApplied = false;
   String message = 'Apply';
+  bool success = false;
 
   Future<void> getjobs() async {
-    isLoading = true;
-    final response = await apiRepository.getAllJob();
-    _result = response;
-    isLoading = false;
-    notifyListeners();
+    try {
+      isLoading = true;
+      final response = await apiRepository.getAllJob();
+      _result = response;
+      success = true;
+      isLoading = false;
+      notifyListeners();
+    } catch (e) {
+      success = false;
+      notifyListeners();
+    }
   }
 
   void appliedJob() {

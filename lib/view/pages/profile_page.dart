@@ -58,21 +58,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   style: titleStyle,
                 ),
               ),
-              Text(
-                email,
-                style: subtitleStyle,
+              Expanded(
+                child: Text(
+                  email,
+                  style: subtitleStyle,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: GestureDetector(
-                  onTap: () => authProvider
-                      .logout()
-                      .whenComplete(() => Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginPage(),
-                          ),
-                          (route) => false)),
+                  onTap: () => authProvider.logout().then((value) =>
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => const LoginPage(),
+                      ))),
                   child: Container(
                     width: 120,
                     height: 50,

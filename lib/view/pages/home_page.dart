@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String name = '';
+  String name = 'wait';
 
   @override
   void initState() {
@@ -77,18 +77,22 @@ class _HomePageState extends State<HomePage> {
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
-                  : ListView.builder(
-                      padding: const EdgeInsets.only(top: 10),
-                      itemCount: jobProvider.result.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: JobCard(
-                            jobData: jobProvider.result[index],
-                          ),
-                        );
-                      },
-                    ),
+                  : jobProvider.success == false
+                      ? const Center(
+                          child: Text('Oops Terjadi Kesalahan'),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.only(top: 10),
+                          itemCount: jobProvider.result.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: JobCard(
+                                jobData: jobProvider.result[index],
+                              ),
+                            );
+                          },
+                        ),
             )
           ],
         ),

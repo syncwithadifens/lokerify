@@ -9,13 +9,10 @@ class CategoryProvider extends ChangeNotifier {
   }
   List<CategoryModel> _result = [];
   List<CategoryModel> get result => _result;
-  bool isLoading = false;
 
   Future<void> getCategories() async {
-    isLoading = true;
     final response = await apiRepository.getAllCategory();
     _result = response;
-    isLoading = false;
     notifyListeners();
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -6,16 +8,28 @@ class AuthProvider extends ChangeNotifier {
   var auth = FirebaseAuth.instance;
   var currentUser = FirebaseAuth.instance.currentUser?.uid;
   CollectionReference ref = FirebaseFirestore.instance.collection('users');
+  String message = '';
+  User? user;
+  String? uid;
+  String? userEmail;
 
-  Future login(String email, String password) async {
+  Future<User?> login(String email, String password) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
-      throw Exception(e.toString());
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+      if (user != null) {
+        uid = user?.uid;
+        userEmail = user?.email;
+      }
+    } on FirebaseAuthException catch (e) {
+      message = e.code;
+      notifyListeners();
     }
+    return user;
   }
 
-  Future register(String email, String password, String name) async {
+  Future<String> register(String email, String password, String name) async {
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -25,12 +39,16 @@ class AuthProvider extends ChangeNotifier {
         'name': name,
         'email': email,
       });
-    } catch (e) {
-      throw Exception(e.toString());
+      return 'ok';
+    } on FirebaseAuthException catch (e) {
+      message = e.code;
+      notifyListeners();
     }
+    return 'Gagal Daftar';
   }
 
-  Future logout() async {
+  Future<String> logout() async {
     await auth.signOut();
+    return 'Berhasil Log Out';
   }
 }
