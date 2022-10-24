@@ -97,9 +97,13 @@ class JobCard extends StatelessWidget {
                 height: 20,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: whiteColor,
+                  color: blackColor,
                 ),
-                child: const Center(child: Text('Detail')),
+                child: Center(
+                    child: Text(
+                  'Detail',
+                  style: TextStyle(color: whiteColor),
+                )),
               ),
             )
           ],

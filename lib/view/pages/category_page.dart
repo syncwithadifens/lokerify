@@ -43,7 +43,9 @@ class CategoryPage extends StatelessWidget {
               width: 200,
               height: 200,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: primaryColor),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(color: primaryColor),
+                  color: blackColor),
               child: Column(
                 children: [
                   Expanded(
@@ -63,8 +65,8 @@ class CategoryPage extends StatelessWidget {
                     child: Text(
                       categoryProvider.result[index].name,
                       maxLines: 1,
-                      style:
-                          titleStyle.copyWith(fontSize: 14, color: whiteColor),
+                      style: titleStyle.copyWith(
+                          fontSize: 14, color: primaryColor),
                     ),
                   )
                 ],

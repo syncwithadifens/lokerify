@@ -6,6 +6,7 @@ import 'package:lokerify/view/widgets/avatar.dart';
 import 'package:lokerify/view/widgets/job_card.dart';
 import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 import 'package:lokerify/view_model/job_provider.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String name = 'wait';
+  String name = '';
 
   @override
   void initState() {
@@ -41,60 +42,64 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: whiteColor,
       bottomNavigationBar: const CustomNavigationBar(),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 50, 20, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hi, $name',
-                      style: titleStyle.copyWith(
-                          fontSize: 20, fontWeight: FontWeight.w400),
-                    ),
-                    Text('Siap cari kerja sekarang juga?',
-                        style: subtitleStyle),
-                  ],
-                ),
-                const Avatar()
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Text(
-                'Semua loker tersedia',
-                style: titleStyle.copyWith(fontSize: 18),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hi, $name',
+                        style: titleStyle.copyWith(
+                            fontSize: 20, fontWeight: FontWeight.w400),
+                      ),
+                      Text('Ready to find a job right now?',
+                          style: subtitleStyle.copyWith(fontSize: 14)),
+                    ],
+                  ),
+                  const Avatar()
+                ],
               ),
-            ),
-            Expanded(
-              child: jobProvider.isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : jobProvider.success == false
-                      ? const Center(
-                          child: Text('Oops Terjadi Kesalahan'),
-                        )
-                      : ListView.builder(
-                          padding: const EdgeInsets.only(top: 10),
-                          itemCount: jobProvider.result.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: JobCard(
-                                jobData: jobProvider.result[index],
-                              ),
-                            );
-                          },
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Text(
+                  'Find your dream job',
+                  style: titleStyle.copyWith(fontSize: 16),
+                ),
+              ),
+              Expanded(
+                child: jobProvider.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
                         ),
-            )
-          ],
+                      )
+                    : jobProvider.success == false
+                        ? Center(
+                            child: Lottie.asset('assets/remote-job.json'),
+                          )
+                        : ListView.builder(
+                            padding: const EdgeInsets.only(top: 10),
+                            itemCount: jobProvider.result.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: JobCard(
+                                  jobData: jobProvider.result[index],
+                                ),
+                              );
+                            },
+                          ),
+              )
+            ],
+          ),
         ),
       ),
     );

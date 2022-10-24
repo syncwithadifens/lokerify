@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/pages/home_page.dart';
 import 'package:lokerify/view_model/auth_provider.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -41,13 +42,27 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Daftar'),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10),
-              child: Text('Nama'),
+            Center(
+                child: Lottie.asset('assets/success.json',
+                    height: 200, fit: BoxFit.cover)),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Center(
+                child: Text(
+                  'Fill in your data',
+                  style: titleStyle.copyWith(fontSize: 18),
+                ),
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                'Nama',
+                style: subtitleStyle,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
               child: TextField(
                 controller: nameCtrl,
                 keyboardType: TextInputType.name,
@@ -62,12 +77,15 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10),
-              child: Text('Email'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                'Email',
+                style: subtitleStyle,
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: TextField(
                 controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
@@ -82,13 +100,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 20, bottom: 10),
-              child: Text('Password'),
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Text(
+                'Password',
+                style: subtitleStyle,
+              ),
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                padding: const EdgeInsets.only(top: 10),
                 child: TextField(
                   controller: passwordCtrl,
                   obscureText: true,
@@ -135,12 +156,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   );
                 },
                 child: isLoading
-                    ? const Center(
-                        child: CircularProgressIndicator(),
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
                       )
-                    : const Text(
-                        'Daftar',
-                        style: TextStyle(color: Colors.white),
+                    : Text(
+                        'Yeahhh',
+                        style: subtitleStyle.copyWith(color: whiteColor),
                       ),
               ),
             ),
@@ -149,9 +172,10 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Sudah punya akun?',
-                    style: TextStyle(color: Colors.grey),
+                    style: subtitleStyle.copyWith(
+                        color: Colors.grey, fontSize: 14),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
@@ -159,7 +183,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         onTap: () {
                           Navigator.pop(context);
                         },
-                        child: const Text('Masuk')),
+                        child: Text(
+                          'Masuk',
+                          style: subtitleStyle,
+                        )),
                   ),
                 ],
               ),

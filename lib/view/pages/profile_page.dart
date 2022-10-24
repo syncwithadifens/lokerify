@@ -68,16 +68,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.only(top: 20),
                 child: GestureDetector(
                   onTap: () => authProvider.logout().then((value) =>
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const LoginPage(),
-                      ))),
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
+                          (route) => false)),
                   child: Container(
                     width: 120,
                     height: 50,
-                    color: primaryColor,
+                    decoration: BoxDecoration(
+                        color: blackColor,
+                        borderRadius: BorderRadius.circular(16)),
                     child: Center(
                       child: Text(
-                        'Keluar',
+                        'Log Out',
                         style: subtitleStyle.copyWith(color: whiteColor),
                       ),
                     ),
