@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
-import 'package:lokerify/view/pages/category_page.dart';
 import 'package:lokerify/view/pages/home_page.dart';
 import 'package:lokerify/view/pages/profile_page.dart';
 
@@ -11,59 +10,45 @@ class CustomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int currentIndex = 0;
-    void navbarLogic(int index) {
-      currentIndex = index;
-      if (index == 0) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ),
-        );
-      } else if (index == 1) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const CategoryPage(),
-          ),
-        );
-      } else {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const ProfilePage(),
-          ),
-        );
-      }
-    }
-
-    return BottomNavigationBar(
-      backgroundColor: whiteColor,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      type: BottomNavigationBarType.fixed,
+    return BottomAppBar(
+      color: blackColor,
+      notchMargin: 8,
       elevation: 0,
-      selectedItemColor: primaryColor,
-      currentIndex: currentIndex,
-      onTap: (value) => navbarLogic(value),
-      items: [
-        BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/office.png',
-              height: 30,
+      shape: const CircularNotchedRectangle(),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
+              },
+              icon: Image.asset(
+                'assets/office.png',
+                color: primaryColor,
+              ),
             ),
-            label: ''),
-        BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/category.png',
-              height: 30,
-            ),
-            label: ''),
-        BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/profile.png',
-              height: 30,
-            ),
-            label: ''),
-      ],
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const ProfilePage(),
+                  ),
+                );
+              },
+              icon: Image.asset(
+                'assets/profile.png',
+                color: primaryColor,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

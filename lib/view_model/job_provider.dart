@@ -24,6 +24,7 @@ class JobProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       success = false;
+      isLoading = false;
       notifyListeners();
     }
   }

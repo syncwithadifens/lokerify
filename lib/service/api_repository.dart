@@ -8,7 +8,6 @@ class ApiRepository {
   final http.Client client;
   ApiRepository(this.client);
   static const apiUrl = 'https://bwa-jobs.herokuapp.com';
-  String message = '';
 
   Future<List<JobModel>> getAllJob() async {
     var response = await http.get(Uri.parse('$apiUrl/jobs'));
@@ -17,7 +16,7 @@ class ApiRepository {
       final result = parsedJson.map((e) => JobModel.fromJson(e)).toList();
       return result;
     } else {
-      return [];
+      throw Exception('Gagal');
     }
   }
 
@@ -28,7 +27,7 @@ class ApiRepository {
       final result = parsedJson.map((e) => CategoryModel.fromJson(e)).toList();
       return result;
     } else {
-      return [];
+      throw Exception('Gagal');
     }
   }
 }

@@ -8,6 +8,8 @@ import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/custom_fab.dart';
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -41,6 +43,8 @@ class _ProfilePageState extends State<ProfilePage> {
     final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       backgroundColor: whiteColor,
+      floatingActionButton: const CustomFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomNavigationBar(),
       body: Center(
         child: Padding(

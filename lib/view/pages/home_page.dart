@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
+import 'package:lokerify/view/pages/profile_page.dart';
 import 'package:lokerify/view/widgets/avatar.dart';
+import 'package:lokerify/view/widgets/custom_fab.dart';
 import 'package:lokerify/view/widgets/job_card.dart';
 import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
 import 'package:lokerify/view_model/job_provider.dart';
@@ -41,6 +43,8 @@ class _HomePageState extends State<HomePage> {
     final jobProvider = Provider.of<JobProvider>(context);
     return Scaffold(
       backgroundColor: whiteColor,
+      floatingActionButton: const CustomFab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomNavigationBar(),
       body: SafeArea(
         child: Padding(
@@ -64,7 +68,17 @@ class _HomePageState extends State<HomePage> {
                           style: subtitleStyle.copyWith(fontSize: 14)),
                     ],
                   ),
-                  const Avatar()
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    ),
+                    child: const Avatar(
+                      h: 60,
+                      w: 60,
+                    ),
+                  )
                 ],
               ),
               Padding(
@@ -81,11 +95,8 @@ class _HomePageState extends State<HomePage> {
                           color: primaryColor,
                         ),
                       )
-                    : jobProvider.success == false
-                        ? Center(
-                            child: Lottie.asset('assets/remote-job.json'),
-                          )
-                        : ListView.builder(
+                    : jobProvider.success
+                        ? ListView.builder(
                             padding: const EdgeInsets.only(top: 10),
                             itemCount: jobProvider.result.length,
                             itemBuilder: (context, index) {
@@ -96,6 +107,16 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               );
                             },
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Lottie.asset('assets/remote-job.json'),
+                              Text(
+                                'Server sedang bermasalah...',
+                                style: subtitleStyle,
+                              )
+                            ],
                           ),
               )
             ],

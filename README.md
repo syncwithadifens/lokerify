@@ -1,17 +1,29 @@
 # lokerify
 
-## Todo
+Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Computer <br>
 
-- [x] Membuat project terintegrasi dengan git dan github
-- [x] Mengintegrasikan project dengan firebase
-- [x] Membuat halaman splash screen
-- [x] Membuat halaman home
-- [x] Membuat halaman categories
-- [x] Membuat halaman profile
-- [x] Membuat halaman detail
-- [x] Menambahkan navigation bar
-- [x] Membuat model
-- [x] Consume API
-- [x] Refactoring dengan state management provider
-- [x] Membuat halaman login
-- [x] Membuat halaman register
+### Syarat yang harus dipenuhi: <br>
+
+- [x] Minimal 5 page
+- [x] Menggunakan navigation
+- [x] UI tidak ada overflow
+- [x] Menerapkan Stateful dan Stateless widget
+- [x] Menerapkan github action
+
+### Bonus nilai: <br>
+
+- [x] Menerapkan state management
+- [x] Menerapkan design pattern
+- [ ] Menerapkan responsive layout
+- [x] Menggunakan unit testing
+
+### Preview
+
+|                                   |                                 |
+| --------------------------------- | ------------------------------- |
+| Splash Page                       | Home Page (error data)          |
+| ![](assets/github/splashpage.png) | ![](assets/github/error.png)    |
+| Login Page                        | Register Page (error data)      |
+| ![](assets/github/login.png)      | ![](assets/github/register.png) |
+| Profile Page                      |                                 |
+| ![](assets/github/profile.png)    |                                 |
