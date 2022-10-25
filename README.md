@@ -23,7 +23,7 @@ Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Com
 | --------------------------------- | ------------------------------- |
 | Splash Page                       | Home Page (error data)          |
 | ![](assets/github/splashpage.png) | ![](assets/github/error.png)    |
-| Login Page                        | Register Page (error data)      |
+| Login Page                        | Register                        |
 | ![](assets/github/login.png)      | ![](assets/github/register.png) |
 | Profile Page                      |                                 |
 | ![](assets/github/profile.png)    |                                 |

@@ -1,10 +1,11 @@
 name: Build and Release APK
-on: push
+on:
+  push:
+    tags:
+      - "v*"
 jobs:
   build:
     name: Build APK
-    env:
-      my_tag: "v1.0.${{github.run_number}}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -23,4 +24,3 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa,build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GH_TOKEN }}
-          tag: ${{env.my_tag}}
