@@ -17,7 +17,7 @@ Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Com
 - [ ] Menerapkan responsive layout
 - [x] Menggunakan unit testing
 
-### Preview
+### Preview Apps
 
 |                                   |                                 |
 | --------------------------------- | ------------------------------- |
