@@ -33,8 +33,8 @@ Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Com
 | Login Page                          | Register Page                       |
 | ![](assets/github/loginpage.png)    | ![](assets/github/registerpage.png) |
 | Home Page                           | Detail Page                         |
-| ![](assets/github/profilepage.png)  | ![](assets/github/detailpage.png)   |
+| ![](assets/github/homepage.png)     | ![](assets/github/detailpage.png)   |
 | Category Page                       | Profile Page                        |
 | ![](assets/github/categorypage.png) | ![](assets/github/profilepage.png)  |
-| Applied State                       |                                     |
-| ![](assets/github/appliedpage.png)  |                                     |
+| Applied Job State                   | Authentication State                |
+| ![](assets/github/appliedpage.png)  | ![](assets/github/loadingpage.png)  |

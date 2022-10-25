@@ -16,8 +16,7 @@ void main() {
       final client = MockClient();
       when(client.get(Uri.parse('https://bwa-jobs.herokuapp.com/jobs')))
           .thenAnswer((_) async => http.Response('[{}]', 200));
-      expect(await ApiRepository(client).getAllJob(),
-          isA<Future<List<JobModel>>>());
+      expect(await ApiRepository(client).getAllJob(), isA<List<JobModel>>());
     });
 
     test('throws an exception if the http call completes with an error', () {
