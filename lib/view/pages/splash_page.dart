@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
               style: titleStyle,
             ),
             Text(
-              'Cari pekerjaanmu secepatnya',
+              'Find your job now',
               style: subtitleStyle,
             )
           ],

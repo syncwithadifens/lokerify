@@ -29,7 +29,7 @@ class CustomNavigationBar extends StatelessWidget {
                 );
               },
               icon: Image.asset(
-                'assets/office.png',
+                'assets/ic_office.png',
                 color: primaryColor,
               ),
             ),
@@ -42,7 +42,7 @@ class CustomNavigationBar extends StatelessWidget {
                 );
               },
               icon: Image.asset(
-                'assets/profile.png',
+                'assets/ic_profile.png',
                 color: primaryColor,
               ),
             )

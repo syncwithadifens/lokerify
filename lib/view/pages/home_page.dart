@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Lottie.asset('assets/remote-job.json'),
                               Text(
-                                'Server sedang bermasalah...',
+                                'Server is under maintenance...',
                                 style: subtitleStyle,
                               )
                             ],

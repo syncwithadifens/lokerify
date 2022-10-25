@@ -11,7 +11,7 @@ class CustomFab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: secondaryColor,
+      backgroundColor: blackColor,
       onPressed: () {
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -20,7 +20,7 @@ class CustomFab extends StatelessWidget {
         );
       },
       child: Image.asset(
-        'assets/category.png',
+        'assets/ic_category.png',
         width: 50,
         height: 50,
         color: whiteColor,

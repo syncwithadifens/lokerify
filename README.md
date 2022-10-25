@@ -17,13 +17,24 @@ Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Com
 - [ ] Menerapkan responsive layout
 - [x] Menggunakan unit testing
 
+### Features
+
+- Provider State Management
+- Firebase Auth & Firestore
+- Consume RESTful API
+- Flutter Unit Test with Mockito
+
 ### Preview
 
-|                                   |                                 |
-| --------------------------------- | ------------------------------- |
-| Splash Page                       | Home Page (error data)          |
-| ![](assets/github/splashpage.png) | ![](assets/github/error.png)    |
-| Login Page                        | Register                        |
-| ![](assets/github/login.png)      | ![](assets/github/register.png) |
-| Profile Page                      |                                 |
-| ![](assets/github/profile.png)    |                                 |
+|                                     |                                     |
+| ----------------------------------- | ----------------------------------- |
+| Splash Page                         | Error State                         |
+| ![](assets/github/splashpage.png)   | ![](assets/github/errorpage.png)    |
+| Login Page                          | Register Page                       |
+| ![](assets/github/loginpage.png)    | ![](assets/github/registerpage.png) |
+| Home Page                           | Detail Page                         |
+| ![](assets/github/profilepage.png)  | ![](assets/github/detailpage.png)   |
+| Category Page                       | Profile Page                        |
+| ![](assets/github/categorypage.png) | ![](assets/github/profilepage.png)  |
+| Applied State                       |                                     |
+| ![](assets/github/appliedpage.png)  |                                     |

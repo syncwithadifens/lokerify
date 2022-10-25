@@ -87,7 +87,7 @@ class DetailPage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Image.asset('assets/dot.png'),
+                        child: Image.asset('assets/ic_dot.png'),
                       ),
                       Text(
                         id.about[index],
@@ -116,7 +116,7 @@ class DetailPage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Image.asset('assets/dot.png'),
+                        child: Image.asset('assets/ic_dot.png'),
                       ),
                       Expanded(
                         child: Text(
@@ -149,7 +149,7 @@ class DetailPage extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 8),
-                        child: Image.asset('assets/dot.png'),
+                        child: Image.asset('assets/ic_dot.png'),
                       ),
                       Expanded(
                         child: Text(

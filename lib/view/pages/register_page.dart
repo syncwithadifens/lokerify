@@ -57,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Text(
-                'Nama',
+                'Name',
                 style: subtitleStyle,
               ),
             ),
@@ -173,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Sudah punya akun?',
+                    'Already have an account?',
                     style: subtitleStyle.copyWith(
                         color: Colors.grey, fontSize: 14),
                   ),
@@ -184,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           Navigator.pop(context);
                         },
                         child: Text(
-                          'Masuk',
+                          'Log In',
                           style: subtitleStyle,
                         )),
                   ),
