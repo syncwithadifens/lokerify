@@ -11,7 +11,7 @@ import 'get_job_test.mocks.dart';
 // Create new instances of this class in each test.
 @GenerateMocks([http.Client])
 void main() {
-  group('Get List Job', () {
+  group('Get Data List Job', () {
     test('returns an job if the http call completes successfully', () async {
       final client = MockClient();
       when(client.get(Uri.parse('https://bwa-jobs.herokuapp.com/jobs')))
