@@ -11,12 +11,6 @@ xargs -n1 -I % gh api --silent repos/$user/$repo/actions/runs/% -X DELETE
 xargs: warning: options --max-args and --replace/-I/-i are mutually exclusive, ignoring previous --max-args value
 ```
 
-# Delete local git tag
-
-```
-git tag -d $(git tag -l)
-```
-
 # Delete remote github tag
 
 ```
@@ -24,3 +18,10 @@ git tag -l | xargs -n 1 git push --delete origin
 ```
 
 (need gh token)
+
+# Delete local git tag
+
+```
+git fetch
+git tag -d $(git tag -l)
+```
