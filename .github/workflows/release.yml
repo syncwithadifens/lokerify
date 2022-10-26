@@ -1,4 +1,4 @@
-name: Build and Release APK
+name: Test, Build, and Release Apps
 on:
   push:
     tags:
@@ -17,10 +17,10 @@ jobs:
         with:
           flutter-version: "3.3.5"
       - run: flutter pub get
-      #- run: flutter test
-      - run: flutter build apk --split-per-abi
-      - name: Push APK to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa,build/app/outputs/bundle/release/app-release.aab"
-          token: ${{ secrets.GH_TOKEN }}
+      - run: flutter test
+      # - run: flutter build apk
+      # - name: Push APK to Releases
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     artifacts: "build/app/outputs/flutter-apk/*,build/ios/iphoneos/app.ipa,build/app/outputs/bundle/release/app-release.aab"
+      #     token: ${{ secrets.GH_TOKEN }}
