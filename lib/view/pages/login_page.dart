@@ -129,18 +129,19 @@ class LoginPage extends StatelessWidget {
                               .login(emailCtrl.text, passwordCtrl.text)
                               .then((result) {
                             if (result != null) {
-                              authProvider.showLoading();
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomePage(),
                               ));
                             } else {
-                              showError(authProvider.message);
+                              Future.delayed(
+                                const Duration(seconds: 2),
+                                () {
+                                  authProvider.showLoading();
+                                  showError(authProvider.message);
+                                },
+                              );
                             }
                           });
-                          Future.delayed(
-                            const Duration(seconds: 4),
-                            () => authProvider.showLoading(),
-                          );
                         },
                         child: Text(
                           'Let\'s Go',

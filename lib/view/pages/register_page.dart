@@ -157,13 +157,15 @@ class RegisterPage extends StatelessWidget {
                               builder: (context) => const HomePage(),
                             ));
                           } else {
-                            showError(authProvider.message);
+                            Future.delayed(
+                              const Duration(seconds: 2),
+                              () {
+                                authProvider.showLoading();
+                                showError(authProvider.message);
+                              },
+                            );
                           }
                         });
-                        Future.delayed(
-                          const Duration(seconds: 4),
-                          () => authProvider.showLoading(),
-                        );
                       },
                       child: Text(
                         'Yeahhh',

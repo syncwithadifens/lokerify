@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:lokerify/service/api_repository.dart';
+import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/pages/home_page.dart';
 import 'package:lokerify/view/pages/splash_page.dart';
 import 'package:lokerify/view_model/auth_provider.dart';
@@ -46,6 +47,8 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        title: 'lokerify',
+        theme: ThemeData(primaryColor: primaryColor),
         home: FirebaseAuth.instance.currentUser != null
             ? const HomePage()
             : const SplashPage(),

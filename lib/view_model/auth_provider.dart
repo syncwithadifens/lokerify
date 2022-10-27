@@ -11,7 +11,7 @@ class AuthProvider extends ChangeNotifier {
   String message = '';
   User? user;
   String? uid;
-  String? userEmail;
+  String email = '';
   bool isLoading = false;
   bool isHide = true;
 
@@ -22,7 +22,7 @@ class AuthProvider extends ChangeNotifier {
       user = userCredential.user;
       if (user != null) {
         uid = user?.uid;
-        userEmail = user?.email;
+        email = user!.email!;
       }
     } on FirebaseAuthException catch (e) {
       message = e.code.replaceAll("-", " ");
@@ -49,9 +49,18 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> logout() async {
-    await auth.signOut();
-    isLoading = false;
+  Future<String> logout() async {
+    try {
+      user = null;
+      isLoading = false;
+      await auth.signOut();
+      notifyListeners();
+      return 'ok';
+    } on FirebaseAuthException catch (e) {
+      message = e.code.replaceAll("-", " ");
+      notifyListeners();
+      return 'fail';
+    }
   }
 
   void showPassword() {
@@ -65,11 +74,9 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void getUser() async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .get();
+    DocumentSnapshot snapshot = await ref.doc(auth.currentUser?.uid).get();
     name = (snapshot.data() as Map<String, dynamic>)['name'];
+    isLoading = false;
     notifyListeners();
   }
 }

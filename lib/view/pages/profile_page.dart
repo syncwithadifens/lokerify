@@ -32,6 +32,11 @@ class _ProfilePageState extends State<ProfilePage> {
       bottomNavigationBar: const CustomNavigationBar(),
       body: authProvider.isLoading
           ? Center(
+              child: CircularProgressIndicator(
+                color: primaryColor,
+              ),
+            )
+          : Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 150),
                 child: Column(
@@ -49,18 +54,21 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Expanded(
                       child: Text(
-                        '${authProvider.userEmail}',
+                        authProvider.email,
                         style: subtitleStyle,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: GestureDetector(
-                        onTap: () => authProvider.logout().then((value) =>
+                        onTap: () => authProvider.logout().then((user) {
+                          if (user == 'ok') {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) => LoginPage()),
-                                (route) => false)),
+                                (route) => false);
+                          }
+                        }),
                         child: Container(
                           width: 120,
                           height: 50,
@@ -78,11 +86,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     )
                   ],
                 ),
-              ),
-            )
-          : Center(
-              child: CircularProgressIndicator(
-                color: primaryColor,
               ),
             ),
     );

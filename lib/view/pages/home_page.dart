@@ -47,7 +47,12 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 authProvider.isLoading
-                    ? Row(
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
+                      )
+                    : Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
@@ -75,11 +80,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                           )
                         ],
-                      )
-                    : Center(
-                        child: CircularProgressIndicator(
-                          color: primaryColor,
-                        ),
                       ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
