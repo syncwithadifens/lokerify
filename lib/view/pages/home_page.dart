@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         systemNavigationBarColor: blackColor,
-        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
         backgroundColor: whiteColor,

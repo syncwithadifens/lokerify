@@ -29,12 +29,12 @@ Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Com
 |                                     |                                     |
 | ----------------------------------- | ----------------------------------- |
 | Splash Page                         | Error State                         |
-| ![](assets/github/splashpage.png)   | ![](assets/github/errorpage.png)    |
+| ![](assets/github/splashpage.png)   | ![](assets/github/errorstate.png)   |
 | Login Page                          | Register Page                       |
 | ![](assets/github/loginpage.png)    | ![](assets/github/registerpage.png) |
 | Home Page                           | Detail Page                         |
 | ![](assets/github/homepage.png)     | ![](assets/github/detailpage.png)   |
 | Category Page                       | Profile Page                        |
 | ![](assets/github/categorypage.png) | ![](assets/github/profilepage.png)  |
-| Applied Job State                   | Authentication State                |
-| ![](assets/github/appliedpage.png)  | ![](assets/github/loadingpage.png)  |
+| Applied Job State                   |                                     |
+| ![](assets/github/appliedstate.png) |                                     |
