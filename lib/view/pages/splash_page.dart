@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/pages/login_page.dart';
 
@@ -14,22 +15,27 @@ class SplashPage extends StatelessWidget {
         ),
       ),
     );
-    return Scaffold(
-      backgroundColor: primaryColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/logo.png'),
-            Text(
-              'Lokerify',
-              style: titleStyle,
-            ),
-            Text(
-              'Find your job now',
-              style: subtitleStyle,
-            )
-          ],
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle(
+        systemNavigationBarColor: primaryColor,
+      ),
+      child: Scaffold(
+        backgroundColor: primaryColor,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/logo.png'),
+              Text(
+                'Lokerify',
+                style: titleStyle,
+              ),
+              Text(
+                'Find your job now',
+                style: subtitleStyle,
+              )
+            ],
+          ),
         ),
       ),
     );

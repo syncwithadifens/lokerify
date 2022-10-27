@@ -138,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       .register(
                           emailCtrl.text, passwordCtrl.text, nameCtrl.text)
                       .then((result) {
-                    if (result.isNotEmpty) {
+                    if (result == 'ok') {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const HomePage(),
                       ));
@@ -158,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: isLoading
                     ? Center(
                         child: CircularProgressIndicator(
-                          color: primaryColor,
+                          color: whiteColor,
                         ),
                       )
                     : Text(
