@@ -23,7 +23,7 @@ class AuthProvider extends ChangeNotifier {
         userEmail = user?.email;
       }
     } on FirebaseAuthException catch (e) {
-      message = e.code;
+      message = e.code.replaceAll("-", " ");
       notifyListeners();
     }
     return user;
@@ -41,10 +41,10 @@ class AuthProvider extends ChangeNotifier {
       });
       return 'ok';
     } on FirebaseAuthException catch (e) {
-      message = e.code;
+      message = e.code.replaceAll("-", " ");
       notifyListeners();
+      return 'fail';
     }
-    return 'Gagal Daftar';
   }
 
   Future<String> logout() async {
