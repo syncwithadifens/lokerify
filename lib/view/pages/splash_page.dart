@@ -18,6 +18,7 @@ class SplashPage extends StatelessWidget {
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         systemNavigationBarColor: primaryColor,
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
         backgroundColor: primaryColor,

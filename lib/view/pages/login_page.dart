@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         systemNavigationBarColor: Colors.grey,
-        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
         backgroundColor: whiteColor,
@@ -141,17 +141,10 @@ class _LoginPageState extends State<LoginPage> {
                             },
                           );
                         },
-                        child: isLoading
-                            ? Center(
-                                child: CircularProgressIndicator(
-                                  color: whiteColor,
-                                ),
-                              )
-                            : Text(
-                                'Let\'s Go',
-                                style:
-                                    subtitleStyle.copyWith(color: whiteColor),
-                              ),
+                        child: Text(
+                          'Let\'s Go',
+                          style: subtitleStyle.copyWith(color: whiteColor),
+                        ),
                       ),
                     ),
               Padding(

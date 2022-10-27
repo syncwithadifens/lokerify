@@ -125,48 +125,49 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), color: primaryColor),
-              child: TextButton(
-                onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  await authProvider
-                      .register(
-                          emailCtrl.text, passwordCtrl.text, nameCtrl.text)
-                      .then((result) {
-                    if (result == 'ok') {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ));
-                    } else {
-                      showError(authProvider.message);
-                    }
-                  });
-                  Future.delayed(
-                    const Duration(seconds: 4),
-                    () {
-                      setState(() {
-                        isLoading = false;
-                      });
-                    },
-                  );
-                },
-                child: isLoading
-                    ? Center(
-                        child: CircularProgressIndicator(
-                          color: whiteColor,
-                        ),
-                      )
-                    : Text(
+            isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: primaryColor,
+                    ),
+                  )
+                : Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: primaryColor),
+                    child: TextButton(
+                      onPressed: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        await authProvider
+                            .register(emailCtrl.text, passwordCtrl.text,
+                                nameCtrl.text)
+                            .then((result) {
+                          if (result == 'ok') {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ));
+                          } else {
+                            showError(authProvider.message);
+                          }
+                        });
+                        Future.delayed(
+                          const Duration(seconds: 4),
+                          () {
+                            setState(() {
+                              isLoading = false;
+                            });
+                          },
+                        );
+                      },
+                      child: Text(
                         'Yeahhh',
                         style: subtitleStyle.copyWith(color: whiteColor),
                       ),
-              ),
-            ),
+                    ),
+                  ),
             Padding(
               padding: const EdgeInsets.only(bottom: 10, top: 10),
               child: Row(
