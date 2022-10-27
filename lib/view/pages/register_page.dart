@@ -5,22 +5,16 @@ import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterPage extends StatelessWidget {
+  RegisterPage({super.key});
 
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
   final nameCtrl = TextEditingController();
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final authProvider = Provider.of<AuthProvider>(context);
 
     void showError(String message) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -36,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     return Scaffold(
+      backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
@@ -66,6 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: TextField(
                 controller: nameCtrl,
                 keyboardType: TextInputType.name,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -89,6 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: TextField(
                 controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -112,8 +109,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 padding: const EdgeInsets.only(top: 10),
                 child: TextField(
                   controller: passwordCtrl,
-                  obscureText: true,
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: TextInputAction.done,
+                  obscureText: authProvider.isHide,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () => authProvider.showPassword(),
+                      icon: Icon(
+                        Icons.visibility,
+                        color: primaryColor,
+                      ),
+                    ),
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
                     filled: true,
@@ -125,10 +131,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            isLoading
+            authProvider.isLoading
                 ? Center(
-                    child: CircularProgressIndicator(
-                      color: primaryColor,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: CircularProgressIndicator(
+                        color: primaryColor,
+                      ),
                     ),
                   )
                 : Container(
@@ -138,9 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: primaryColor),
                     child: TextButton(
                       onPressed: () async {
-                        setState(() {
-                          isLoading = true;
-                        });
+                        authProvider.showLoading();
                         await authProvider
                             .register(emailCtrl.text, passwordCtrl.text,
                                 nameCtrl.text)
@@ -155,11 +162,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         });
                         Future.delayed(
                           const Duration(seconds: 4),
-                          () {
-                            setState(() {
-                              isLoading = false;
-                            });
-                          },
+                          () => authProvider.showLoading(),
                         );
                       },
                       child: Text(
@@ -169,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 10, top: 10),
+              padding: const EdgeInsets.only(bottom: 15, top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -181,13 +184,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          'Log In',
-                          style: subtitleStyle,
-                        )),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Log In',
+                        style: subtitleStyle,
+                      ),
+                    ),
                   ),
                 ],
               ),

@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/pages/login_page.dart';
@@ -18,24 +16,10 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String name = '';
-  String email = '';
-
   @override
   void initState() {
     super.initState();
-    getUser();
-  }
-
-  void getUser() async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .get();
-    setState(() {
-      name = (snapshot.data() as Map<String, dynamic>)['name'];
-      email = (snapshot.data() as Map<String, dynamic>)['email'];
-    });
+    Provider.of<AuthProvider>(context, listen: false).getUser();
   }
 
   @override
@@ -46,55 +30,61 @@ class _ProfilePageState extends State<ProfilePage> {
       floatingActionButton: const CustomFab(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomNavigationBar(),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 150),
-          child: Column(
-            children: [
-              const Avatar(
-                w: 100,
-                h: 100,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Text(
-                  name,
-                  style: titleStyle,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  email,
-                  style: subtitleStyle,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: GestureDetector(
-                  onTap: () => authProvider.logout().then((value) =>
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()),
-                          (route) => false)),
-                  child: Container(
-                    width: 120,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: blackColor,
-                        borderRadius: BorderRadius.circular(16)),
-                    child: Center(
+      body: authProvider.isLoading
+          ? Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 150),
+                child: Column(
+                  children: [
+                    const Avatar(
+                      w: 100,
+                      h: 100,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
                       child: Text(
-                        'Log Out',
-                        style: subtitleStyle.copyWith(color: whiteColor),
+                        authProvider.name,
+                        style: titleStyle,
                       ),
                     ),
-                  ),
+                    Expanded(
+                      child: Text(
+                        '${authProvider.userEmail}',
+                        style: subtitleStyle,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: GestureDetector(
+                        onTap: () => authProvider.logout().then((value) =>
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()),
+                                (route) => false)),
+                        child: Container(
+                          width: 120,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              color: blackColor,
+                              borderRadius: BorderRadius.circular(16)),
+                          child: Center(
+                            child: Text(
+                              'Log Out',
+                              style: subtitleStyle.copyWith(color: whiteColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+              ),
+            )
+          : Center(
+              child: CircularProgressIndicator(
+                color: primaryColor,
+              ),
+            ),
     );
   }
 }

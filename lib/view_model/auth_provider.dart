@@ -6,12 +6,14 @@ import 'package:flutter/foundation.dart';
 
 class AuthProvider extends ChangeNotifier {
   var auth = FirebaseAuth.instance;
-  var currentUser = FirebaseAuth.instance.currentUser?.uid;
   CollectionReference ref = FirebaseFirestore.instance.collection('users');
+  String name = '';
   String message = '';
   User? user;
   String? uid;
   String? userEmail;
+  bool isLoading = false;
+  bool isHide = true;
 
   Future<User?> login(String email, String password) async {
     try {
@@ -47,8 +49,27 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<String> logout() async {
+  Future<void> logout() async {
     await auth.signOut();
-    return 'Berhasil Log Out';
+    isLoading = false;
+  }
+
+  void showPassword() {
+    isHide = !isHide;
+    notifyListeners();
+  }
+
+  void showLoading() {
+    isLoading = !isLoading;
+    notifyListeners();
+  }
+
+  void getUser() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+    name = (snapshot.data() as Map<String, dynamic>)['name'];
+    notifyListeners();
   }
 }

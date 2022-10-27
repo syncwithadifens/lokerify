@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lokerify/theme/styles.dart';
@@ -8,6 +6,7 @@ import 'package:lokerify/view/widgets/avatar.dart';
 import 'package:lokerify/view/widgets/custom_fab.dart';
 import 'package:lokerify/view/widgets/job_card.dart';
 import 'package:lokerify/view/widgets/custom_navigation_bar.dart';
+import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:lokerify/view_model/job_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -20,28 +19,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String name = '';
-
   @override
   void initState() {
     super.initState();
     Provider.of<JobProvider>(context, listen: false).getjobs();
-    getUser();
-  }
-
-  void getUser() async {
-    DocumentSnapshot snapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .get();
-    setState(() {
-      name = (snapshot.data() as Map<String, dynamic>)['name'];
-    });
+    Provider.of<AuthProvider>(context, listen: false).getUser();
   }
 
   @override
   Widget build(BuildContext context) {
     final jobProvider = Provider.of<JobProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
         systemNavigationBarColor: blackColor,
@@ -58,35 +46,41 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Hi, $name',
-                          style: titleStyle.copyWith(
-                              fontSize: 20, fontWeight: FontWeight.w400),
-                        ),
-                        Text('Ready to find a job right now?',
-                            style: subtitleStyle.copyWith(fontSize: 14)),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ProfilePage(),
+                authProvider.isLoading
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Hi, ${authProvider.name}',
+                                style: titleStyle.copyWith(
+                                    fontSize: 20, fontWeight: FontWeight.w400),
+                              ),
+                              Text('Ready to find a job right now?',
+                                  style: subtitleStyle.copyWith(fontSize: 14)),
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const ProfilePage(),
+                              ),
+                            ),
+                            child: const Avatar(
+                              h: 60,
+                              w: 60,
+                            ),
+                          )
+                        ],
+                      )
+                    : Center(
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
                         ),
                       ),
-                      child: const Avatar(
-                        h: 60,
-                        w: 60,
-                      ),
-                    )
-                  ],
-                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Text(

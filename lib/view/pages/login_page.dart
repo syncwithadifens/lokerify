@@ -7,17 +7,11 @@ import 'package:lokerify/view_model/auth_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: TextField(
                   controller: emailCtrl,
                   keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 20),
@@ -92,8 +87,16 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     controller: passwordCtrl,
                     keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
+                    textInputAction: TextInputAction.done,
+                    obscureText: authProvider.isHide,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () => authProvider.showPassword(),
+                        icon: Icon(
+                          Icons.visibility,
+                          color: primaryColor,
+                        ),
+                      ),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20),
                       filled: true,
@@ -105,10 +108,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              isLoading
+              authProvider.isLoading
                   ? Center(
-                      child: CircularProgressIndicator(
-                        color: primaryColor,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
                       ),
                     )
                   : Container(
@@ -118,13 +124,12 @@ class _LoginPageState extends State<LoginPage> {
                           color: primaryColor),
                       child: TextButton(
                         onPressed: () async {
-                          setState(() {
-                            isLoading = true;
-                          });
+                          authProvider.showLoading();
                           await authProvider
                               .login(emailCtrl.text, passwordCtrl.text)
                               .then((result) {
                             if (result != null) {
+                              authProvider.showLoading();
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomePage(),
                               ));
@@ -134,11 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           });
                           Future.delayed(
                             const Duration(seconds: 4),
-                            () {
-                              setState(() {
-                                isLoading = false;
-                              });
-                            },
+                            () => authProvider.showLoading(),
                           );
                         },
                         child: Text(
@@ -153,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const RegisterPage(),
+                        builder: (context) => RegisterPage(),
                       ));
                     },
                     child: Text(
