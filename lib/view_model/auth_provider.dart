@@ -8,10 +8,11 @@ class AuthProvider extends ChangeNotifier {
   var auth = FirebaseAuth.instance;
   CollectionReference ref = FirebaseFirestore.instance.collection('users');
   String name = '';
+  String email = '';
   String message = '';
   User? user;
   String? uid;
-  String email = '';
+  String? userEmail;
   bool isLoading = false;
   bool isHide = true;
 
@@ -22,7 +23,7 @@ class AuthProvider extends ChangeNotifier {
       user = userCredential.user;
       if (user != null) {
         uid = user?.uid;
-        email = user!.email!;
+        userEmail = user?.email;
       }
     } on FirebaseAuthException catch (e) {
       message = e.code.replaceAll("-", " ");
@@ -76,6 +77,7 @@ class AuthProvider extends ChangeNotifier {
   void getUser() async {
     DocumentSnapshot snapshot = await ref.doc(auth.currentUser?.uid).get();
     name = (snapshot.data() as Map<String, dynamic>)['name'];
+    email = (snapshot.data() as Map<String, dynamic>)['email'];
     isLoading = false;
     notifyListeners();
   }
