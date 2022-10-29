@@ -20,7 +20,9 @@ Project ini dibuat untuk pengumpulan mini project kegiatan kampus merdeka NF Com
 ### Features
 
 - Provider State Management
-- Firebase Auth & Firestore
+- Firebase Auth
+- Firebase Firestore
+- Firebase Storage
 - Consume RESTful API
 - Flutter Unit Test with Mockito
 

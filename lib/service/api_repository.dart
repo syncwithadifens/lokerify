@@ -7,7 +7,7 @@ import 'package:lokerify/model/job_model/job_model.dart';
 class ApiRepository {
   final http.Client client;
   ApiRepository(this.client);
-  static const apiUrl = 'https://bwa-jobs.herokuapp.comm';
+  static const apiUrl = 'https://bwa-jobs.herokuapp.com';
 
   Future<List<JobModel>> getAllJob() async {
     var response = await http.get(Uri.parse('$apiUrl/jobs'));
