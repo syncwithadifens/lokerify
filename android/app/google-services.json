@@ -40,6 +40,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1047702083314:android:f786fc53a87cfc5fa8a26b",
+        "android_client_info": {
+          "package_name": "com.withadifens.lokerify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1047702083314-9ndm4obrj02anugrv29c27lu540mues5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdVTmiP2cQ01FvrDnn6oXsijgBwLEdbHY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1047702083314-9ndm4obrj02anugrv29c27lu540mues5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1047702083314-3ekg6l23fnhrk75u378d6vf8etavusvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.lokerify"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDdVTmiP2cQ01FvrDnn6oXsijgBwLEdbHY',
-    appId: '1:1047702083314:android:9f4637dace55f4a3a8a26b',
+    appId: '1:1047702083314:android:f786fc53a87cfc5fa8a26b',
     messagingSenderId: '1047702083314',
     projectId: 'lokerify-1513a',
     storageBucket: 'lokerify-1513a.appspot.com',
