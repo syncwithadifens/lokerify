@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'lokerify',
+        title: 'Lokerify',
         theme: ThemeData(primaryColor: primaryColor),
         home: FirebaseAuth.instance.currentUser != null
             ? const HomePage()
