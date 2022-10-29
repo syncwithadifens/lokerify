@@ -29,8 +29,9 @@ class Avatar extends StatelessWidget {
             shape: BoxShape.circle,
             color: whiteColor,
             image: img != null
-                ? DecorationImage(image: NetworkImage(img!))
-                : const DecorationImage(image: AssetImage('assets/avatar.jpg')),
+                ? DecorationImage(image: NetworkImage(img!), fit: BoxFit.cover)
+                : const DecorationImage(
+                    image: AssetImage('assets/avatar.jpg'), fit: BoxFit.cover),
           ),
         )
       ],

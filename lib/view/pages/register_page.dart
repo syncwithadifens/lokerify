@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:lokerify/theme/styles.dart';
 import 'package:lokerify/view/pages/home_page.dart';
 import 'package:lokerify/view_model/auth_provider.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -38,8 +39,52 @@ class RegisterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-                child: Lottie.asset('assets/success.json',
-                    height: 200, fit: BoxFit.cover)),
+                child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 105,
+                  height: 105,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: whiteColor,
+                    border: Border.all(color: primaryColor),
+                  ),
+                ),
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: whiteColor,
+                    image: authProvider.avatar != null
+                        ? DecorationImage(
+                            image: FileImage(File(authProvider.avatar!.path)),
+                            fit: BoxFit.cover)
+                        : const DecorationImage(
+                            image: AssetImage('assets/avatar.jpg'),
+                            fit: BoxFit.cover),
+                  ),
+                ),
+                Positioned(
+                    right: 8,
+                    bottom: 0,
+                    child: GestureDetector(
+                      onTap: () => authProvider.selectImg(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: primaryColor,
+                          border: Border.all(color: whiteColor, width: 2),
+                        ),
+                        child: Icon(
+                          Icons.add,
+                          color: whiteColor,
+                        ),
+                      ),
+                    )),
+              ],
+            )),
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Center(

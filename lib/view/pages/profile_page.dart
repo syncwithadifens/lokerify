@@ -41,9 +41,10 @@ class _ProfilePageState extends State<ProfilePage> {
                 padding: const EdgeInsets.symmetric(vertical: 150),
                 child: Column(
                   children: [
-                    const Avatar(
+                    Avatar(
                       w: 100,
                       h: 100,
+                      img: authProvider.photo,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),

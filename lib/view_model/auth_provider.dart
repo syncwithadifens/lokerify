@@ -1,35 +1,34 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthProvider extends ChangeNotifier {
-  var auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
   CollectionReference ref = FirebaseFirestore.instance.collection('users');
+  String? photo;
   String name = '';
   String email = '';
   String message = '';
-  User? user;
-  String? uid;
-  String? userEmail;
   bool isLoading = false;
   bool isHide = true;
+  final imagePicker = ImagePicker();
+  XFile? avatar;
 
-  Future<User?> login(String email, String password) async {
+  Future<String> login(String email, String password) async {
     try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      user = userCredential.user;
-      if (user != null) {
-        uid = user?.uid;
-        userEmail = user?.email;
-      }
+      await auth.signInWithEmailAndPassword(email: email, password: password);
+      return 'ok';
     } on FirebaseAuthException catch (e) {
       message = e.code.replaceAll("-", " ");
       notifyListeners();
+      return 'fail';
     }
-    return user;
   }
 
   Future<String> register(String email, String password, String name) async {
@@ -37,11 +36,29 @@ class AuthProvider extends ChangeNotifier {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: email, password: password);
 
+      if (avatar != null) {
+        File file = File(avatar!.path);
+        await storage
+            .ref()
+            .child('profile')
+            .child('${userCredential.user!.uid}.png')
+            .putFile(file);
+        photo = await storage
+            .ref()
+            .child('profile')
+            .child('${userCredential.user!.uid}.png')
+            .getDownloadURL();
+      } else {
+        photo = null;
+      }
       await ref.doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'name': name,
         'email': email,
+        'photoUrl': photo
       });
+      avatar = null;
+      notifyListeners();
       return 'ok';
     } on FirebaseAuthException catch (e) {
       message = e.code.replaceAll("-", " ");
@@ -52,7 +69,6 @@ class AuthProvider extends ChangeNotifier {
 
   Future<String> logout() async {
     try {
-      user = null;
       isLoading = false;
       await auth.signOut();
       notifyListeners();
@@ -78,7 +94,18 @@ class AuthProvider extends ChangeNotifier {
     DocumentSnapshot snapshot = await ref.doc(auth.currentUser?.uid).get();
     name = (snapshot.data() as Map<String, dynamic>)['name'];
     email = (snapshot.data() as Map<String, dynamic>)['email'];
+    photo = (snapshot.data() as Map<String, dynamic>)['photoUrl'];
     isLoading = false;
+    notifyListeners();
+  }
+
+  void selectImg() async {
+    final check = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (check != null) {
+      avatar = check;
+    } else {
+      avatar = null;
+    }
     notifyListeners();
   }
 }

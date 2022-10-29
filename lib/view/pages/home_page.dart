@@ -74,9 +74,10 @@ class _HomePageState extends State<HomePage> {
                                 builder: (context) => const ProfilePage(),
                               ),
                             ),
-                            child: const Avatar(
+                            child: Avatar(
                               h: 60,
                               w: 60,
+                              img: authProvider.photo,
                             ),
                           )
                         ],

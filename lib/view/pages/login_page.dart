@@ -128,7 +128,7 @@ class LoginPage extends StatelessWidget {
                           await authProvider
                               .login(emailCtrl.text, passwordCtrl.text)
                               .then((result) {
-                            if (result != null) {
+                            if (result == 'ok') {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const HomePage(),
                               ));
